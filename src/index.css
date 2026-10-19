@@ -1,0 +1,79 @@
+
+@import "tailwindcss";
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color-scheme: dark;
+
+  --brand-black: #0A0A0A;
+  --brand-orange: #FF6A00;
+  --brand-cyan: #00CFFF;
+  --brand-white: #FFFFFF;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page-bg: #0A0A0A;
+  --surface-bg: #151515;
+  --page-text: #FFFFFF;
+  --muted-text: #B5B5B5;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page-bg: #FFFFFF;
+  --surface-bg: #F3F5F7;
+  --page-text: #0A0A0A;
+  --muted-text: #555555;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--page-text);
+  transition: background-color 250ms, color 250ms;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
