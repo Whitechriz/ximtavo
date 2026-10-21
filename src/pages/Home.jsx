@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
-
+import XimTavoIntelligence from "../components/intelligence/XimTavoIntelligence";
 function CountUp({ target, suffix = "", duration = 2000 }) {
     const [count, setCount] = useState(0);
 
@@ -558,7 +558,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
+         <XimTavoIntelligence />
 
         </main>
     );

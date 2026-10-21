@@ -33,15 +33,13 @@ export default function Navbar() {
 
   const closeMenus = () => setActiveMenu(null);
 
-  const linkClass = `flex items-center gap-1.5 whitespace-nowrap text-[15px] font-medium transition-colors hover:text-[#FF6A00] ${
-    isDark ? "text-white" : "text-[#0A0A0A]"
-  }`;
+  const linkClass = `flex items-center gap-1.5 whitespace-nowrap text-[15px] font-medium transition-colors hover:text-[#FF6A00] ${isDark ? "text-white" : "text-[#0A0A0A]"
+    }`;
 
-  const dropdownClass = `rounded-xl p-5 shadow-2xl ${
-    isDark
+  const dropdownClass = `rounded-xl p-5 shadow-2xl ${isDark
       ? "border border-white/10 bg-[#151515] text-white"
       : "border border-black/5 bg-white text-slate-700"
-  }`;
+    }`;
 
   const renderThemeButton = (mobile = false) => (
     <button
@@ -51,16 +49,14 @@ export default function Navbar() {
       title={`Switch to ${isDark ? "light" : "dark"} mode`}
       className={
         mobile
-          ? `flex w-full items-center gap-3 border-t py-5 text-sm transition-colors hover:text-[#FF6A00] ${
-              isDark
-                ? "border-white/15 text-white"
-                : "border-slate-200 text-[#0A0A0A]"
-            }`
-          : `flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#00CFFF] hover:text-[#0A0A0A] ${
-              isDark
-                ? "bg-white text-[#0A0A0A]"
-                : "bg-[#0A0A0A] text-white"
-            }`
+          ? `flex w-full items-center gap-3 border-t py-5 text-sm transition-colors hover:text-[#FF6A00] ${isDark
+            ? "border-white/15 text-white"
+            : "border-slate-200 text-[#0A0A0A]"
+          }`
+          : `flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#00CFFF] hover:text-[#0A0A0A] ${isDark
+            ? "bg-white text-[#0A0A0A]"
+            : "bg-[#0A0A0A] text-white"
+          }`
       }
     >
       {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -72,13 +68,12 @@ export default function Navbar() {
 
   return (
     <>
-<header
-  className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-    isDark
-      ? "border-white/10 bg-[#000000] text-white shadow-md"
-      : "border-black/10 bg-white text-[#0A0A0A] shadow-sm"
-  }`}
->
+      <header
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${isDark
+            ? "border-white/10 bg-[#000000] text-white shadow-md"
+            : "border-black/10 bg-white text-[#0A0A0A] shadow-sm"
+          }`}
+      >
         <div className="mx-auto flex h-24 max-w-[1500px] items-center justify-between px-6 lg:px-12 xl:px-16">
           {/* Brand */}
           <Link
@@ -107,33 +102,34 @@ export default function Navbar() {
                   setActiveMenu(item.dropdown ? item.label : null)
                 }
               >
-                <button
-                  type="button"
-                  aria-expanded={
-                    item.dropdown ? activeMenu === item.label : undefined
-                  }
-                  onFocus={() =>
-                    setActiveMenu(item.dropdown ? item.label : null)
-                  }
-                  onClick={() =>
-                    item.dropdown
-                      ? setActiveMenu(
-                          activeMenu === item.label ? null : item.label
-                        )
-                      : closeMenus()
-                  }
-                  className={linkClass}
-                >
-                  {item.label}
-                  {item.dropdown && (
+                {item.dropdown ? (
+                  <button
+                    type="button"
+                    aria-expanded={activeMenu === item.label}
+                    onFocus={() => setActiveMenu(item.label)}
+                    onClick={() =>
+                      setActiveMenu(
+                        activeMenu === item.label ? null : item.label
+                      )
+                    }
+                    className={linkClass}
+                  >
+                    {item.label}
                     <ChevronDown
                       size={15}
-                      className={`transition-transform ${
-                        activeMenu === item.label ? "rotate-180" : ""
-                      } ${isDark ? "text-[#00CFFF]" : "text-sky-700"}`}
+                      className={`transition-transform ${activeMenu === item.label ? "rotate-180" : ""
+                        } ${isDark ? "text-[#00CFFF]" : "text-sky-700"}`}
                     />
-                  )}
-                </button>
+                  </button>
+                ) : (
+                  <Link
+                    to={item.to}
+                    onClick={closeMenus}
+                    className={linkClass}
+                  >
+                    {item.label}
+                  </Link>
+                )}
 
                 {/* Standard dropdown */}
                 {item.dropdown &&
@@ -142,20 +138,19 @@ export default function Navbar() {
                     <div
                       className={`absolute left-0 top-[78px] w-72 ${dropdownClass}`}
                     >
-                      {item.items.map((label) => (
-                        <button
-                          key={label}
-                          type="button"
+                      {item.items.map((link) => (
+                        <Link
+                          key={link.to}
+                          to={link.to}
                           onClick={closeMenus}
-                          className={`flex w-full items-center justify-between border-b py-3 text-left text-sm last:border-0 ${
-                            isDark
+                          className={`flex w-full items-center justify-between border-b py-3 text-left text-sm last:border-0 ${isDark
                               ? "border-white/10 hover:text-[#00CFFF]"
                               : "border-sky-100 hover:text-sky-700"
-                          }`}
+                            }`}
                         >
-                          {label}
+                          {link.label}
                           <ArrowUpRight size={14} />
-                        </button>
+                        </Link>
                       ))}
                     </div>
                   )}
@@ -173,23 +168,23 @@ export default function Navbar() {
                               const Icon = service.icon;
 
                               return (
-                                <button
-                                  type="button"
-                                  key={service.label}
-                                  onClick={closeMenus}
-                                  className={`group flex min-h-[61px] w-full items-center gap-2 border-b py-3 text-left text-[15px] transition-colors ${
-                                    isDark
-                                      ? "border-white/10 hover:text-[#00CFFF]"
-                                      : "border-[#8bb5cf] hover:text-sky-600"
-                                  }`}
-                                >
-                                  <Icon
-                                    size={20}
-                                    strokeWidth={1.35}
-                                    className="shrink-0 text-[#FF6A00]"
-                                  />
-                                  <span>{service.label}</span>
-                                </button>
+<Link
+  key={service.to}
+  to={service.to}
+  onClick={closeMenus}
+  className={`group flex min-h-[61px] w-full items-center gap-2 border-b py-3 text-left text-[15px] transition-colors ${
+    isDark
+      ? "border-white/10 hover:text-[#00CFFF]"
+      : "border-[#8bb5cf] hover:text-sky-600"
+  }`}
+>
+  <Icon
+    size={20}
+    strokeWidth={1.35}
+    className="shrink-0 text-[#FF6A00]"
+  />
+  <span>{service.label}</span>
+</Link>
                               );
                             })}
                           </div>
@@ -205,9 +200,8 @@ export default function Navbar() {
           <div className="hidden shrink-0 items-center gap-5 lg:flex">
             <button
               type="button"
-              className={`flex items-center gap-2 text-sm ${
-                isDark ? "text-white" : "text-[#0A0A0A]"
-              }`}
+              className={`flex items-center gap-2 text-sm ${isDark ? "text-white" : "text-[#0A0A0A]"
+                }`}
               aria-label="Selected country: Nigeria"
             >
               <span className="text-xl">🇳🇬</span>
@@ -224,9 +218,8 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className={`rounded-md p-2 transition-colors hover:text-[#FF6A00] lg:hidden ${
-              isDark ? "text-white" : "text-[#0A0A0A]"
-            }`}
+            className={`rounded-md p-2 transition-colors hover:text-[#FF6A00] lg:hidden ${isDark ? "text-white" : "text-[#0A0A0A]"
+              }`}
             aria-label="Open navigation menu"
             aria-expanded={mobileOpen}
           >
@@ -246,19 +239,17 @@ export default function Navbar() {
           />
 
           <aside
-            className={`absolute inset-y-0 right-0 flex w-[88%] max-w-[430px] flex-col shadow-2xl ${
-              isDark
+            className={`absolute inset-y-0 right-0 flex w-[88%] max-w-[430px] flex-col shadow-2xl ${isDark
                 ? "bg-[#101010] text-white"
                 : "bg-white text-[#34416f]"
-            }`}
+              }`}
             aria-label="Mobile navigation"
           >
             <div
-              className={`flex h-[90px] shrink-0 items-center justify-between border-b px-5 ${
-                isDark
+              className={`flex h-[90px] shrink-0 items-center justify-between border-b px-5 ${isDark
                   ? "border-white/10"
                   : "border-slate-200"
-              }`}
+                }`}
             >
               <Link
                 to="/"
@@ -281,82 +272,103 @@ export default function Navbar() {
               </button>
             </div>
 
-            <nav className="flex-1 overflow-y-auto px-6 py-2">
-              {navigation.map((item) => {
-                const expanded = mobileExpanded === item.label;
 
-                return (
-                  <div key={item.label}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (item.dropdown) {
-                          setMobileExpanded(expanded ? null : item.label);
-                        } else {
-                          closeMobile();
-                        }
-                      }}
-                      className={`flex min-h-[62px] w-full items-center justify-between border-b text-left text-[15px] ${
-                        isDark ? "border-white/10" : "border-[#8bb5cf]"
-                      }`}
-                    >
-                      {item.label}
-                      {item.dropdown && (
-                        <ChevronDown
-                          size={17}
-                          className={`text-[#FF6A00] transition-transform ${
-                            expanded ? "rotate-180" : ""
-                          }`}
-                        />
-                      )}
-                    </button>
+<nav className="flex-1 overflow-y-auto px-6 py-2">
+  {navigation.map((item) => {
+    const expanded = mobileExpanded === item.label;
 
-                    {expanded && (
-                      <div
-                        className={`px-3 py-2 ${
-                          isDark ? "bg-white/[0.04]" : "bg-slate-50"
-                        }`}
-                      >
-                        {(item.label === "Our Services"
-                          ? services.map((service) => ({
-                              label: service.label,
-                            }))
-                          : (item.items || []).map((label) => ({
-                              label,
-                            }))
-                        ).map((link) => (
-                          <button
-                            key={link.label}
-                            type="button"
-                            onClick={closeMobile}
-                            className={`block w-full border-b py-3 text-left text-sm last:border-0 ${
-                              isDark
-                                ? "border-white/10 hover:text-[#00CFFF]"
-                                : "border-slate-200 hover:text-sky-700"
-                            }`}
-                          >
-                            {link.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+    return (
+      <div key={item.label}>
+        {/* Direct navigation links */}
+        {!item.dropdown ? (
+          <Link
+            to={item.to}
+            onClick={closeMobile}
+            className={`flex min-h-[62px] w-full items-center justify-between border-b text-left text-[15px] transition-colors hover:text-[#FF6A00] ${
+              isDark
+                ? "border-white/10"
+                : "border-[#8bb5cf]"
+            }`}
+          >
+            {item.label}
+          </Link>
+        ) : (
+          /* Dropdown headings */
+          <button
+            type="button"
+            aria-expanded={expanded}
+            onClick={() =>
+              setMobileExpanded(expanded ? null : item.label)
+            }
+            className={`flex min-h-[62px] w-full items-center justify-between border-b text-left text-[15px] transition-colors hover:text-[#FF6A00] ${
+              isDark
+                ? "border-white/10"
+                : "border-[#8bb5cf]"
+            }`}
+          >
+            {item.label}
 
-              <button
-                type="button"
-                className={`flex w-full items-center gap-3 border-b py-5 text-sm ${
-                  isDark ? "border-white/10" : "border-[#8bb5cf]"
+            <ChevronDown
+              size={17}
+              className={`text-[#FF6A00] transition-transform ${
+                expanded ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+        )}
+
+        {/* Dropdown links */}
+        {item.dropdown && expanded && (
+          <div
+            className={`px-3 py-2 ${
+              isDark ? "bg-white/[0.04]" : "bg-slate-50"
+            }`}
+          >
+            {(item.label === "Our Services"
+              ? services
+              : item.items || []
+            ).map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={closeMobile}
+                className={`flex w-full items-center justify-between gap-3 border-b py-3 text-left text-sm last:border-0 transition-colors ${
+                  isDark
+                    ? "border-white/10 hover:text-[#00CFFF]"
+                    : "border-slate-200 hover:text-sky-700"
                 }`}
               >
-                <span className="text-xl">🇳🇬</span>
-                Nigeria
-                <ChevronDown size={15} />
-              </button>
+                <span>{link.label}</span>
+                <ArrowUpRight
+                  size={14}
+                  className="shrink-0 text-[#FF6A00]"
+                />
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  })}
 
-              {renderThemeButton(true)}
-            </nav>
+  {/* Country selector */}
+  <button
+    type="button"
+    className={`flex w-full items-center gap-3 border-b py-5 text-sm ${
+      isDark
+        ? "border-white/10"
+        : "border-[#8bb5cf]"
+    }`}
+  >
+    <span className="text-xl">🇳🇬</span>
+    Nigeria
+    <ChevronDown size={15} />
+  </button>
+
+  {/* Theme toggle */}
+  {renderThemeButton(true)}
+</nav>
+
           </aside>
         </div>
       )}
