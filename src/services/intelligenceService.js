@@ -1,7 +1,5 @@
 
-const GNEWS_API_URL = "https://gnews.io/api/v4/search";
-
-const API_KEY = import.meta.env.VITE_GNEWS_API_KEY;
+const GNEWS_API_URL = "/api/news";
 
 export const INTELLIGENCE_CATEGORIES = [
   "All",
@@ -13,72 +11,51 @@ export const INTELLIGENCE_CATEGORIES = [
   "Digital Policy",
 ];
 
-const CATEGORY_QUERIES = {
-  All: 'technology OR finance OR business OR cybersecurity OR telecommunications OR "artificial intelligence"',
-  "Technology & AI":
-    'technology OR "artificial intelligence" OR AI',
-  Telecommunications:
-    'telecommunications OR 5G OR mobile networks',
-  "Finance & Markets":
-    'finance OR markets OR fintech OR banking',
-  "African Business":
-    'Africa AND (business OR economy OR startups OR investment)',
-  Cybersecurity:
-    'cybersecurity OR "data breach" OR ransomware',
-  "Digital Policy":
-    '"digital policy" OR "data protection" OR "technology regulation"',
-};
-
 export async function fetchIntelligence({
   category = "All",
   limit = 10,
   signal,
 } = {}) {
-  if (!API_KEY) {
-    throw new Error(
-      "Missing GNews API key. Add VITE_GNEWS_API_KEY to your .env file and restart Vite."
-    );
-  }
-
   const params = new URLSearchParams({
-    q: CATEGORY_QUERIES[category] || CATEGORY_QUERIES.All,
-    lang: "en",
-    max: String(Math.min(Math.max(Number(limit) || 10, 1), 10)),
-    sortby: "publishedAt",
-    apikey: API_KEY,
+    category,
+    limit: String(
+      Math.min(Math.max(Number(limit) || 10, 1), 10)
+    ),
   });
 
   const response = await fetch(
     `${GNEWS_API_URL}?${params.toString()}`,
     {
       method: "GET",
-      headers: { Accept: "application/json" },
+      headers: {
+        Accept: "application/json",
+      },
       signal,
     }
   );
 
   if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
-      throw new Error(
-        "GNews rejected the API key or access. Check your key and plan."
-      );
+    let message = `News request failed (${response.status}).`;
+
+    try {
+      const errorData = await response.json();
+
+      if (errorData?.error) {
+        message = errorData.error;
+      }
+    } catch {
+      // Keep the default error message.
     }
 
-    if (response.status === 429) {
-      throw new Error(
-        "GNews request limit reached. Please try again later."
-      );
-    }
-
-    throw new Error(
-      `GNews request failed (${response.status}).`
-    );
+    throw new Error(message);
   }
 
   const result = await response.json();
 
   if (!Array.isArray(result.articles)) {
-    throw new Error("GNews returned an invalid article response.");
+    throw new Error(
+      "The news service returned an invalid article response."
+    );
   }
 
   const seen = new Set();
@@ -88,8 +65,8 @@ export async function fetchIntelligence({
       if (!article?.title || !article?.url) return false;
 
       if (seen.has(article.url)) return false;
-      seen.add(article.url);
 
+      seen.add(article.url);
       return true;
     })
     .map((article, index) => ({
