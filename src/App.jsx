@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Insights from "./pages/Insights";
 import About from "./pages/About";
 import MissionVisionValues from "./pages/MissionVisionValues";
+import WebsiteAppDevelopment from "./pages/services/WebsiteAppDevelopment";
+import ComputerHardwareMaintenance from "./pages/services/ComputerHardwareMaintenance";
 // import Services from "./pages/Services";
 // import Sectors from "./pages/Sectors";
 // import Community from "./pages/Community";
@@ -19,6 +21,8 @@ export default function App() {
         <Route path="/insights" element={<Insights />} />
         <Route path="/about" element={<About />} />
         <Route path="/mission-vision-values" element={<MissionVisionValues />} />
+        <Route path="/services/website-app-development" element={<WebsiteAppDevelopment />} />
+        <Route path="/services/computer-hardware-maintenance" element={<ComputerHardwareMaintenance />} />
         {/* <Route path="/services" element={<Services />} />
         <Route path="/sectors" element={<Sectors />} />
         <Route path="/community" element={<Community />} />
