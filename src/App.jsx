@@ -7,8 +7,15 @@ import About from "./pages/About";
 import MissionVisionValues from "./pages/MissionVisionValues";
 import WebsiteAppDevelopment from "./pages/services/WebsiteAppDevelopment";
 import ComputerHardwareMaintenance from "./pages/services/ComputerHardwareMaintenance";
-// import Services from "./pages/Services";
-// import Sectors from "./pages/Sectors";
+import ICTConsultancy from "./pages/services/ICTDigitalSkillsTraining";
+import ProjectManagementICTConsulting from "./pages/services/ProjectManagementICTConsulting";
+import ConstructionTechnologyRealEstate from "./pages/services/ConstructionTechnologyRealEstate";
+import CCTVInstallation from "./pages/services/CCTVInstallation";
+import SoftwareEnterpriseSolutions from "./pages/services/SoftwareEnterpriseSolutions";
+import AIAutomationSolutions from "./pages/services/AIAutomationSolutions";
+import DigitalMarketingSocialMedia from "./pages/services/DigitalMarketingSocialMedia";
+import GraphicsDesignBranding from "./pages/services/GraphicsDesignBranding";
+import Sectors from "./pages/Sectors";
 // import Community from "./pages/Community";
 // import Insights from "./pages/Insights";
 // import NotFound from "./pages/NotFound";
@@ -23,6 +30,15 @@ export default function App() {
         <Route path="/mission-vision-values" element={<MissionVisionValues />} />
         <Route path="/services/website-app-development" element={<WebsiteAppDevelopment />} />
         <Route path="/services/computer-hardware-maintenance" element={<ComputerHardwareMaintenance />} />
+        <Route path="/services/ict-digital-skills-training" element={<ICTConsultancy />} />
+        <Route path="/services/project-management-ict-consulting" element={<ProjectManagementICTConsulting />} />
+        <Route path="/services/construction-technology-real-estate" element={<ConstructionTechnologyRealEstate />} />
+        <Route path="/services/cctv-installation" element={<CCTVInstallation />} />
+        <Route path="/services/software-enterprise-solutions" element={<SoftwareEnterpriseSolutions />} />
+        <Route path="/services/ai-automation-solutions" element={<AIAutomationSolutions />} />
+        <Route path="/services/digital-marketing-social-media" element={<DigitalMarketingSocialMedia />} />
+        <Route path="/services/graphics-design-branding" element={<GraphicsDesignBranding />} />
+        <Route path="/sectors" element={<Sectors />} />
         {/* <Route path="/services" element={<Services />} />
         <Route path="/sectors" element={<Sectors />} />
         <Route path="/community" element={<Community />} />
