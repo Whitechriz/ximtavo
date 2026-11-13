@@ -17,6 +17,7 @@ import AIAutomationSolutions from "./pages/services/AIAutomationSolutions";
 import DigitalMarketingSocialMedia from "./pages/services/DigitalMarketingSocialMedia";
 import GraphicsDesignBranding from "./pages/services/GraphicsDesignBranding";
 import Sectors from "./pages/Sectors";
+import Community from "./pages/Community";
 // import Community from "./pages/Community";
 // import Insights from "./pages/Insights";
 // import NotFound from "./pages/NotFound";
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/services/ai-automation-solutions" element={<AIAutomationSolutions />} />
         <Route path="/services/digital-marketing-social-media" element={<DigitalMarketingSocialMedia />} />
         <Route path="/services/graphics-design-branding" element={<GraphicsDesignBranding />} />
+        <Route path="/corporate-social-responsibility" element={<Community />} />
         <Route path="/sectors" element={<Sectors />} />
         <Route path="/contact" element={<Contact />} />
         {/* <Route path="/services" element={<Services />} />
