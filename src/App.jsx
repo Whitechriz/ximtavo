@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Insights from "./pages/Insights";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import MissionVisionValues from "./pages/MissionVisionValues";
 import WebsiteAppDevelopment from "./pages/services/WebsiteAppDevelopment";
 import ComputerHardwareMaintenance from "./pages/services/ComputerHardwareMaintenance";
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/services/digital-marketing-social-media" element={<DigitalMarketingSocialMedia />} />
         <Route path="/services/graphics-design-branding" element={<GraphicsDesignBranding />} />
         <Route path="/sectors" element={<Sectors />} />
+        <Route path="/contact" element={<Contact />} />
         {/* <Route path="/services" element={<Services />} />
         <Route path="/sectors" element={<Sectors />} />
         <Route path="/community" element={<Community />} />
