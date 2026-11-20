@@ -18,7 +18,7 @@ import DigitalMarketingSocialMedia from "./pages/services/DigitalMarketingSocial
 import GraphicsDesignBranding from "./pages/services/GraphicsDesignBranding";
 import Sectors from "./pages/Sectors";
 import Community from "./pages/Community";
-// import Community from "./pages/Community";
+import Academy from "./pages/community/Academy";
 // import Insights from "./pages/Insights";
 // import NotFound from "./pages/NotFound";
 
@@ -43,6 +43,7 @@ export default function App() {
         <Route path="/corporate-social-responsibility" element={<Community />} />
         <Route path="/sectors" element={<Sectors />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/community/academy" element={<Academy />} />
         {/* <Route path="/services" element={<Services />} />
         <Route path="/sectors" element={<Sectors />} />
         <Route path="/community" element={<Community />} />

@@ -34,6 +34,10 @@ export const navigation = [
     to: "/sectors",
     items: [],
   },
+      {
+      label: "Tech Academy",
+      to: "/community/academy",
+    },
   {
     label: "Community",
     dropdown: true,
